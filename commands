@@ -1,0 +1,2 @@
+> kubectl create secret generic secret-name --from-literal jwt=abcd
+> kubectl get secret
