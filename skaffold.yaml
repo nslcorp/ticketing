@@ -8,7 +8,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: snikitin/auth
+    - image: sn/auth
       context: auth
       docker:
         dockerfile: Dockerfile

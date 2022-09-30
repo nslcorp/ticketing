@@ -1,2 +1,12 @@
 > kubectl create secret generic secret-name --from-literal jwt=abcd
 > kubectl get secret
+> kubectl get nodes
+
+> skaffold dev
+
+
+npm i jsonwebtoken mongoose express-validator express-async-errors cookie-session @types/jsonwebtoken @types/cookie-session
+
+
+
+https://kubernetes.github.io/ingress-nginx/examples/
