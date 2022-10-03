@@ -1,5 +1,8 @@
 import express  from 'express';
+import 'express-async-errors';
 import bodyParser from 'body-parser';
+import { NotFoundError } from './errors/not-found-error';
+import { errorHandler } from './middlwares/error-handler';
 import { currentUserRouter } from './routes/current-user';
 import { signinUserRouter } from './routes/signin';
 import { signoutUserRouter } from './routes/signout';
@@ -18,6 +21,12 @@ app.use(signoutUserRouter)
 app.get('/', (req, res) => {
   res.send('Success')
 })
+
+app.all('*', async (req, res) => {
+  throw new NotFoundError();
+});
+
+app.use(errorHandler);
 
 
 
