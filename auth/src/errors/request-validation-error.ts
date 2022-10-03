@@ -5,7 +5,7 @@ export class RequestValidationError extends CustomError {
   statusCode = 400
 
   constructor(private errors: ValidationError[]) {
-    super();
+    super('[Custom] validation error');
     // Object.setPrototypeOf(this, RequestValidationError.prototype)
   }
 

@@ -1,5 +1,5 @@
 import express  from 'express';
-import 'express-async-errors';
+// import 'express-async-errors';
 import bodyParser from 'body-parser';
 import { NotFoundError } from './errors/not-found-error';
 import { errorHandler } from './middlwares/error-handler';
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.send('Success')
 })
 
-app.all('*', async (req, res) => {
+app.all('*',  (req, res) => {
   throw new NotFoundError();
 });
 

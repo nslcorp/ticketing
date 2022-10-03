@@ -1,14 +1,22 @@
 import { NextFunction, Request, Response } from 'express';
 import { CustomError } from '../errors/custom-error';
-import { DatabaseConnectionError } from '../errors/database-connection-error';
-import { RequestValidationError } from '../errors/request-validation-error';
 
-// type isCustomError = RequestValidationError | DatabaseConnectionError
+export const errorHandler = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (err instanceof CustomError) {
 
-export const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
-  console.log('[logger] Server error.', error)
-  if(error instanceof CustomError){
-    res.status(error.statusCode).send({errors: error.serializeErrors()})
+    // console.log(err);
+    res.status(err.statusCode).send({ errors: err.serializeErrors() });
+    return next();
+
   }
-  res.status(400).send('Server:: unhandled error')
-}
+
+  res.status(400).send({
+    errors: [{ message: 'Something went wrong' }]
+  });
+  return next();
+};
