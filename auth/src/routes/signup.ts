@@ -1,33 +1,42 @@
-import { Router, Request, Response, NextFunction } from 'express';
-import { validationResult, body } from 'express-validator';
-import { DatabaseConnectionError } from '../errors/database-connection-error';
+import express, { Request, Response } from 'express';
+import { body, validationResult } from 'express-validator';
+import { User } from '../models/user';
 import { RequestValidationError } from '../errors/request-validation-error';
+import { BadRequestError } from '../errors/bad-request-error';
 
-const router = Router();
+const router = express.Router();
 
 router.post(
   '/api/users/signup',
   [
-    body('email').isEmail().withMessage('Email must be valid'),
+    body('email')
+      .isEmail()
+      .withMessage('Email must be valid'),
     body('password')
       .trim()
-      .isLength({min: 4, max: 20})
-      .withMessage('Password must be between 4 and 20 characters'),
+      .isLength({ min: 4, max: 20 })
+      .withMessage('Password must be between 4 and 20 characters')
   ],
-  (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const error = new Error('Email and Password must be valid')
-      // res.send(errors.array())
 
-      // next()
-      // throw error
-      throw new RequestValidationError(errors.array())
+    if (!errors.isEmpty()) {
+      throw new RequestValidationError(errors.array());
     }
 
-    throw new DatabaseConnectionError()
+    const { email, password } = req.body;
 
-    res.send('Hi there! ==> /api/users/signup');
-  });
+    const existingUser = await User.findOne({ email });
 
-export { router as signupUserRouter };
+    if (existingUser) {
+      throw new BadRequestError('Email in use');
+    }
+
+    const user = User.build({ email, password });
+    await user.save();
+
+    res.status(201).send(user);
+  }
+);
+
+export { router as signupRouter };

@@ -10,3 +10,7 @@ npm i jsonwebtoken mongoose express-validator express-async-errors cookie-sessio
 
 
 https://kubernetes.github.io/ingress-nginx/examples/
+
+
+2-auth-done--signin,signup,signout,currentuser
+3-auth-done--userModel,signup,badRequestError
