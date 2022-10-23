@@ -1,4 +1,11 @@
 
+const collections = await mongoose.connection.db.collections();
+  for (let collection of collections) {
+    await collection.deleteMany({});
+  }
+
+
+
 npm i express-validator
 https://express-validator.github.io/docs/
 

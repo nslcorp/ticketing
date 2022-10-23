@@ -11,6 +11,7 @@
 
 npm i jsonwebtoken mongoose express-validator express-async-errors cookie-session @types/jsonwebtoken @types/cookie-session
 
+npm i --save-dev @types/jest @types/supertest jest supertest ts-jest mongodb-memory-server
 
 
 https://kubernetes.github.io/ingress-nginx/examples/
