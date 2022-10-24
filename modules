@@ -1,9 +1,23 @@
 
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+... #TEST# ..
 const collections = await mongoose.connection.db.collections();
   for (let collection of collections) {
     await collection.deleteMany({});
   }
 
+## implicitly set ENV variable before ALL tests
+process.env.JWT_KEY = 'asdfasdf';
+
+## set FALSE when expect sending cookies only with HTTP for TESTS
+cookieSession({ signed: false, secure:rocess.env.NODE_ENV !== 'test'})
+
+## Cookies does not including automatically with SuperTest
+
+
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
 
 npm i express-validator
