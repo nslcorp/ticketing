@@ -1,8 +1,11 @@
+import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
 
-it('returns a 404 if the ticket is not found', async () => {
-  await request(app).get('/api/tickets/laskdjfalksfdlkakj').send().expect(404);
+it('returns a 404 if the ticket is not found (with valid MongoDoc id)', async () => {
+  const id = new mongoose.Types.ObjectId().toHexString();   // return example or MongoDoc id value
+  const response = await request(app).get(`/api/tickets/${id}`).send();
+  expect(response.status).toEqual(404)
 });
 
 it('returns the ticket if the ticket is found', async () => {

@@ -5,6 +5,7 @@ https://express-validator.github.io/docs/
 ```
 const { body, validationResult } = require('express-validator');
 
+
 app.post(
 '/user',
 // username must be an email

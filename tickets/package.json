@@ -6,13 +6,13 @@
   "scripts": {
     "start": "ts-node-dev src/index.ts",
     "start:local": "MODE=local && JWT_KEY=123 npm run start",
-    "test": "jest --watchAll --no-cache"
+    "test": "jest --watchAll --no-cache --silent=false"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sn-ticketing/common": "^1.0.6",
+    "@sn-ticketing/common": "^1.0.7",
     "@types/cookie-session": "^2.0.44",
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^8.5.9",
