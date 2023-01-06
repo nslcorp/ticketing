@@ -4,6 +4,9 @@ Ticket.findById({id: req.params.id});        // Error .. as not async operation
 await Ticket.findById({id: req.params.id});  // Error .. as we having ID property, but looking at MongoDB_id
 await Ticket.find({id: req.params.id});
 
+import {randomBytes} from 'crypto';
+randomBytes(4).toString('hex');
+
 
 Mongoose API
 const id = new mongoose.Types.ObjectId().toHexString();   // return example or MongoDoc id value

@@ -3,6 +3,9 @@
 > kubectl get secrets
 > kubectl get pods
 
+> kubectl get pods
+> kubectl port-forward nats-depl-79cb768cf6-4rnhn 4222:4222
+
 
 > skaffold dev
 
